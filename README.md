@@ -3,7 +3,7 @@
 A self-contained chess app built with Java and Spark Java. It includes a clear rules engine and a responsive web UI.
 
 ## Features
-- Legal move enforcement (no moving into check)
+- Legal move enforcement
 - Check, checkmate, stalemate detection
 - Pawn promotion to queen
 - Spark Java server with a responsive HTML board
