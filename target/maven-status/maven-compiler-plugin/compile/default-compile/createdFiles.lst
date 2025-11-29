@@ -1,0 +1,13 @@
+com\example\chess\Server.class
+com\example\chess\Board$1.class
+com\example\chess\Piece$Color.class
+com\example\chess\dto\StateDTO.class
+com\example\chess\Move.class
+com\example\chess\Piece.class
+com\example\chess\dto\MoveDTO.class
+com\example\chess\Piece$Type.class
+com\example\chess\GameService.class
+com\example\chess\Board.class
+com\example\chess\Game.class
+com\example\chess\Piece$1.class
+com\example\chess\dto\ResultDTO.class
