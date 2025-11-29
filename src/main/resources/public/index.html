@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Java Chess</title>
+  <title>Chess Master</title>
   <style>
     :root{
       --bg:#0e0f12; --panel:#15171c; --accent:#7cb342; --accent-2:#ffc107;
@@ -63,7 +63,7 @@
         <button id="reset" class="danger">Reset</button>
         <button id="flip" class="primary">Flip Board</button>
       </div>
-      <div class="legend">Tip: Click a piece, then a target square.</div>
+      <div class="legend">Click a piece, then its destination.</div>
       <div class="scores">
         <div class="score" id="scoreW"><h3>White</h3><div class="val">0</div><div class="captures" id="capsW"></div></div>
         <div class="score" id="scoreB"><h3>Black</h3><div class="val">0</div><div class="captures" id="capsB"></div></div>
@@ -198,7 +198,7 @@ async function move(sr,sc,tr,tc){
   const preTarget = state && state.board ? state.board[tr][tc] : '.';
   const res = await fetch('/api/move', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({sr,sc,tr,tc}) });
   const data = await res.json();
-  if(!data.ok) { alert('Illegal move'); sel=null; render(); return; }
+  if(!data.ok) { alert('Illegal move. Try a different square.'); sel=null; render(); return; }
   const from = coordToNotation(sr,sc), to = coordToNotation(tr,tc);
   lastFrom = [sr,sc]; lastTo = [tr,tc];
   lastMoves = [ `${from} → ${to}`, ...lastMoves ].slice(0,12);
@@ -217,13 +217,12 @@ function onSq(e){
 
 document.getElementById('reset').addEventListener('click', async ()=>{
   await fetch('/api/reset', { method:'POST' });
-  // Clear local UI history, last move markers, and selection, then reload and play reset sound
+  // Clear local UI history, last move markers, and selection, then reload
   lastMoves = [];
   lastFrom = null;
   lastTo = null;
   sel = null;
   await load();
-  sndReset();
 });
 
 document.getElementById('flip').addEventListener('click', ()=>{ flipped=!flipped; render(); });

@@ -25,11 +25,11 @@ public class GameService {
     public synchronized ResultDTO applyMove(MoveDTO move) {
         Objects.requireNonNull(move, "move");
         // Basic input validation: bounds
-        if (!Board.inBounds(move.sr, move.sc) || !Board.inBounds(move.tr, move.tc)) {
-            return new ResultDTO(false, getState(), "Out of bounds");
+            if (!Board.inBounds(move.sr, move.sc) || !Board.inBounds(move.tr, move.tc)) {
+                return new ResultDTO(false, getState(), "Square out of bounds.");
         }
         boolean ok = game.makeMove(move.sr, move.sc, move.tr, move.tc);
-        return new ResultDTO(ok, getState(), ok ? null : "Illegal move");
+            return new ResultDTO(ok, getState(), ok ? null : "Move is not legal.");
     }
 
     public synchronized StateDTO reset() {
